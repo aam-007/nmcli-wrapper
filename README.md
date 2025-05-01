@@ -1,103 +1,92 @@
+
 nmcli-wrapper
 
-A fullscreen, dialog-driven Bash wrapper for nmcli that simplifies scanning, connecting, and disconnecting from Wi‑Fi networks.
-Table of Contents
+nmcli-wrapper is a fullscreen, user-friendly Bash script that wraps nmcli with a dialog-based interface, making it easier to scan, connect to, and disconnect from Wi-Fi networks without needing to remember complex commands.
+🛠️ Features
 
-    Requirements
-    Installation
-    Usage
-    Adding to PATH
-    Creating an Alias
-    Optional: Man Page & Completion
+    Fullscreen dialog UI (like Debian/Ubuntu installer)
 
-Requirements
-Operating System: Linux (tested on Debian, Ubuntu, Mint)
-Bash: version 4.0 or newer
-dialog: for the fullscreen, curses-style UI
+    Scan and list available Wi-Fi networks
+
+    Prompt for password and connect securely
+
+    View current connection status
+
+    Disconnect from a network with one click
+
+    Clean and minimal CLI experience
+
+📦 Requirements
+
+Make sure the following are installed on your system:
+
+    Linux (tested on Linux Mint, Ubuntu, Debian)
+
+    bash
+
+    nmcli (comes with NetworkManager, usually installed by default)
+
+    dialog (for fullscreen UI)
+
+To install dialog, run:
 
 sudo apt install dialog
 
-NetworkManager (nmcli): comes with NetworkManager
+🚀 Installation
+1. Clone the repository
 
-sudo apt install network-manager
-
-Installation
-
-Clone or download this repository:
-
-git clone https://github.com/PhonexLegend/nmcli-wrapper.git
+git clone https://github.com/yourusername/nmcli-wrapper.git
 cd nmcli-wrapper
 
-Make the script executable:
+2. Make the script executable
 
 chmod +x nmcli-wrapper.sh
 
-(Recommended) Install system‑wide into /usr/local/bin:
+3. Install system-wide (so you can run it anywhere)
+
+Copy the script to a directory in your system $PATH:
 
 sudo cp nmcli-wrapper.sh /usr/local/bin/nmcli-wrapper
 sudo chmod +x /usr/local/bin/nmcli-wrapper
 
-If you lack root privileges, you can install it under your home directory:
+4. (Optional) Create an alias for quicker access
 
-mkdir -p ~/.local/bin
-cp nmcli-wrapper.sh ~/.local/bin/nmcli-wrapper
-chmod +x ~/.local/bin/nmcli-wrapper
+If you want to launch it with a shorter name (like wifi), add this to your ~/.bashrc:
 
-Usage
-
-Once installed, simply run:
-
-nmcli-wrapper
-
-You will be presented with a fullscreen menu:
-
-    Connect to Wi‑Fi: Scan, select SSID, and (if necessary) enter password
-    Connection Status: Display your current Wi‑Fi SSID
-    Disconnect Wi‑Fi: Drop the wireless link
-    Exit: Quit the UI
-
-All interactions happen through dialog pop‑ups for a clean, user‑friendly experience.
-Adding to PATH
-
-If you installed to a custom location (e.g., ~/.local/bin), ensure that directory is in your PATH. Add the following line to your ~/.bashrc (or ~/.profile):
-
-export PATH="$HOME/.local/bin:$PATH"
-
-After editing, reload your shell:
-
-source ~/.bashrc
-
-Creating an Alias
-
-To make the command even shorter, add an alias in your ~/.bashrc:
-
-# ~/.bashrc
 alias wifi="nmcli-wrapper"
 
-Reload your configuration:
+Then apply the change:
 
 source ~/.bashrc
 
-Now you can simply type:
+Now you can run the app from anywhere by typing:
 
 wifi
 
-Optional: Man Page & Completion
+💡 Usage
 
-Man page
+Launch the wrapper from a terminal:
 
-sudo cp docs/nmcli-wrapper.1 /usr/local/share/man/man1/
-sudo mandb
+nmcli-wrapper
 
-Bash completion Copy or write a completion script into /etc/bash_completion.d/nmcli-wrapper:
+Or, if you've set the alias:
 
-#!/usr/bin/env bash
-_nmcli_wrapper() {
-  COMPREPLY=( $( compgen -W "connect status disconnect exit" -- "${COMP_WORDS[1]}" ) )
-}
-complete -F _nmcli_wrapper nmcli-wrapper
+wifi
 
-Then reload:
+Follow the onscreen prompts to:
 
-source /etc/bash_completion.d/nmcli-wrapper
+    Scan for available Wi-Fi networks
 
+    Enter a password for secured networks
+
+    Check current Wi-Fi connection
+
+    Disconnect from the current network
+
+🧹 Uninstall
+
+To remove the system-wide installed wrapper:
+
+sudo rm /usr/local/bin/nmcli-wrapper
+
+Remove the alias from ~/.bashrc if you added one.
